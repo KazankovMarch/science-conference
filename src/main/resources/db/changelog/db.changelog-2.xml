@@ -1,0 +1,76 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+    <changeSet id="db.changelog-2-improve-person-table" author="adkazankov">
+        <preConditions>
+            <tableExists tableName="person"/>
+            <tableExists tableName="presentation"/>
+        </preConditions>
+        <sql>
+<![CDATA[
+--Здесь я выношу компании в отдельный словарь для устранения риска опечатки и подобных аномалий
+CREATE TABLE company (
+    id SERIAL PRIMARY KEY,
+    name varchar(255)
+);
+INSERT INTO company(name)
+SELECT DISTINCT speaker_company FROM person
+WHERE speaker_company IS NOT NULL;
+--кроме того выношу спикера в отдельную таблицу для уменьшения дублирования данных
+-- и уменьшения риска некорректных данных (например когда у слушателя тоже указана компания)
+CREATE TABLE speaker (
+    person_id bigint REFERENCES person(id) PRIMARY KEY,
+    company_id bigint REFERENCES company(id)
+);
+INSERT INTO speaker(person_id, company_id)
+SELECT p.id,
+(SELECT c.id FROM company c WHERE c.name=p.speaker_company)
+FROM person p WHERE is_speaker=true;
+
+ALTER TABLE person DROP COLUMN speaker_company;
+ALTER TABLE person DROP COLUMN is_speaker;
+ALTER TABLE presentation DROP constraint presentation_speaker_id_fkey;
+ALTER TABLE presentation ADD FOREIGN KEY (speaker_id) REFERENCES speaker(person_id);
+
+
+--выношу аудиторию в отдельную таблицу, будет легче при ее изменении (напр. закупили дополнительные сидения),
+--нет риска некорректных данных, когда для одной аудитории указана разная макс. вместимость слушателей
+CREATE TABLE auditory (
+    id SERIAL PRIMARY KEY,
+    address varchar(255) UNIQUE NOT NULL,
+    audience_max_count int NOT NULL DEFAULT 0
+);
+INSERT INTO auditory(address, audience_max_count)
+SELECT DISTINCT
+p1.auditory_address,
+(SELECT max(p2.audience_max_count) FROM presentation p2 WHERE p2.auditory_address=p1.auditory_address)
+FROM presentation p1;
+
+ALTER TABLE presentation ADD COLUMN auditory_id bigint REFERENCES auditory(id);
+UPDATE presentation p SET auditory_id=(SELECT id FROM auditory a WHERE a.address=p.auditory_address);
+
+ALTER TABLE presentation DROP COLUMN auditory_address;
+ALTER TABLE presentation DROP COLUMN audience_max_count;
+
+
+--Вместо списка слушателей завожу отдельную табличку "билетов" - кто на какую презентацию собирается идти
+--при этом избегается дублирование данных, как если бы мы просто разбили массивы в той же табличке
+CREATE TABLE ticket (
+    person_id bigint REFERENCES person(id),
+    presentation_id bigint REFERENCES presentation(id)
+);
+INSERT INTO ticket(person_id, presentation_id) SELECT
+    unnest(p.audience), p.id
+FROM presentation p;
+
+ALTER TABLE presentation DROP COLUMN audience;
+
+]]>
+        </sql>
+    </changeSet>
+    
+</databaseChangeLog>
