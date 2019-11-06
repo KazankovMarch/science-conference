@@ -1,0 +1,55 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+    <changeSet id="db.changelog-1-create-tables" author="adkazankov">
+        <preConditions>
+            <not>
+                <tableExists tableName="person"/>
+                <tableExists tableName="presentation"/>
+            </not>
+        </preConditions>
+        <sql>
+<![CDATA[
+
+-- нарушение 2 нормальной формы: speakerCompany зависит от id и isSpeaker
+-- (зависимость от первичного ключа неполная)
+CREATE TABLE person (
+    id SERIAL PRIMARY KEY,
+    fio varchar(255) NOT NULL,
+    is_speaker boolean NOT NULL,
+    speaker_company varchar(255)
+);
+
+--нарушение 1 нормальной формы: список слушателей не скалярный
+--нарушение 3 нормальной формы: audience_max_count зависит только от auditory_address
+CREATE TABLE presentation (
+    id SERIAL PRIMARY KEY,
+    title varchar(255) NOT NULL,
+    speaker_id bigint REFERENCES person(id),
+    time_start timestamp,
+    time_end timestamp,
+    audience_max_count int DEFAULT null,
+    auditory_address varchar(255) DEFAULT null,
+    audience bigint[] NOT NULL DEFAULT array[]::bigint[]
+);
+
+INSERT INTO person(id, fio, is_speaker, speaker_company) VALUES
+(1, 'Казанков Андрей Дмитриевич', true, 'FIX'),
+(2, 'Попов Вячеслав Никитович', false, null),
+(3, 'Гришкевич Олег Юрьевич', false, null),
+(4, 'Кагирова Камилла Сергеевна', false, null),
+(5, 'Дубровский Михаил Олегович', false, null);
+
+INSERT INTO presentation
+(title, speaker_id, time_start, time_end, audience_max_count, auditory_address, audience) VALUES
+('Domain Driven Development', 1, make_timestamp(2020, 1, 1, 8, 15, 12.5), make_timestamp(2020, 1, 1, 8, 15, 15.5),
+ 70, 'корпус 2, ауд. 219', array[2,3,4,5])
+]]>
+        </sql>
+    </changeSet>
+    
+</databaseChangeLog>
