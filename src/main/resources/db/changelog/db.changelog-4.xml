@@ -1,0 +1,28 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+    <changeSet id="db.changelog-4-add-email-to-person" author="adkazankov">
+        <preConditions>
+            <tableExists tableName="person"/>
+            <tableExists tableName="presentation"/>
+            <tableExists tableName="ticket"/>
+        </preConditions>
+        <sql>
+<![CDATA[
+CREATE EXTENSION citext;
+CREATE DOMAIN email AS citext
+    CHECK ( value ~ '^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$' );
+
+ALTER TABLE person ADD COLUMN
+email email;
+
+UPDATE person SET email = 'akazankov@fix.ru' WHERE id = 1;
+]]>
+        </sql>
+    </changeSet>
+    
+</databaseChangeLog>
