@@ -2,61 +2,53 @@ package ru.adkazankov.scienceconference.control
 
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
+import javafx.fxml.Initializable
 import javafx.scene.control.Tab
+import javafx.scene.control.TabPane
+import javafx.scene.layout.HBox
 import org.springframework.stereotype.Controller
 import javafx.scene.layout.VBox
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
+import java.net.URL
+import java.util.*
+import javax.annotation.PostConstruct
 
-
-
-@Controller
 class MainFrameController {
-    @FXML
-    private lateinit var presentationTab: Tab
-    @FXML
-    private lateinit var personTab: Tab
-    @FXML
-    private lateinit var speakerTab: Tab
-    @FXML
-    private lateinit var auditoryTab: Tab
-    @FXML
-    private lateinit var ticketTab: Tab
-    @FXML
-    private lateinit var queryTab: Tab
-    @FXML
-    private lateinit var showColumnVBox: VBox
 
+    @Autowired
+    private lateinit var tabControllers: List<AbstractTabController<*>>
     @FXML
-    fun onAddAction(event: ActionEvent) {
+    private lateinit var tabPane: TabPane
 
+    @PostConstruct
+    private fun init(){
+        tabControllers.forEach {
+            tabPane.tabs.add(Tab(it.name, it.content))
+        }
     }
 
-    @FXML
-    fun onDeleteAction(event: ActionEvent) {
-
-    }
+    private fun selectedTabController() =
+            tabControllers.filter { tabPane.selectionModel.selectedItem.content == it.content }.first()
 
     @FXML
-    fun onEditAction(event: ActionEvent) {
-
-    }
+    fun onAddAction(event: ActionEvent) = selectedTabController().onAddAction(event)
 
     @FXML
-    fun onFilterAction(event: ActionEvent) {
-
-    }
+    fun onDeleteAction(event: ActionEvent) = selectedTabController().onDeleteAction(event)
 
     @FXML
-    fun onLoadAction(event: ActionEvent) {
-
-    }
+    fun onEditAction(event: ActionEvent) = selectedTabController().onEditAction(event)
 
     @FXML
-    fun onRefreshAction(event: ActionEvent) {
-
-    }
+    fun onFilterAction(event: ActionEvent) = selectedTabController().onFilterAction(event)
 
     @FXML
-    fun onSaveAction(event: ActionEvent) {
+    fun onLoadAction(event: ActionEvent) = selectedTabController().onLoadAction(event)
 
-    }
+    @FXML
+    fun onRefreshAction(event: ActionEvent) = selectedTabController().onRefreshAction(event)
+
+    @FXML
+    fun onSaveAction(event: ActionEvent) = selectedTabController().onSaveAction(event)
 }

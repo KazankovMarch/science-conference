@@ -2,19 +2,37 @@ package ru.adkazankov.scienceconference
 
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import ru.adkazankov.scienceconference.control.AbstractTabController
 import ru.adkazankov.scienceconference.control.MainFrameController
+import ru.adkazankov.scienceconference.control.PersonTabController
 import java.io.IOException
+
+private const val ABSTRACT_TAB_FRAME = "view.fxml/AbstractTab.fxml"
 
 @Configuration
 class ControllerConfiguration {
 
+    @Bean("tabControllers")
+    fun getTabControllers(
+            @Autowired personTabController: PersonTabController
+    )= listOf(personTabController)
+
+
+    @Bean("personTab")
+    fun getPersonTab(): View = loadView(ABSTRACT_TAB_FRAME)
+    @Bean
+    fun getPersonTabController()
+            = getPersonTab().controller as PersonTabController
+
+
+
+
     @Bean("mainFrame")
     @Throws(IOException::class)
-    fun getMainFrame(): View {
-        return loadView("view.fxml/MainFrame.fxml")
-    }
+    fun getMainFrame(): View = loadView("view.fxml/MainFrame.fxml")
 
     /**
      * Именно благодаря этому методу мы добавили контроллер в контекст спринга,
@@ -22,9 +40,8 @@ class ControllerConfiguration {
      */
     @Bean
     @Throws(IOException::class)
-    fun getMainController(): MainFrameController {
-        return getMainFrame().controller as MainFrameController
-    }
+    fun getMainController()
+            = getMainFrame().controller as MainFrameController
 
     /**
      * Самый обыкновенный способ использовать FXML загрузчик.
