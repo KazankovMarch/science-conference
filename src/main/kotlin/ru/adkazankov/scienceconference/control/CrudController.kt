@@ -1,21 +1,19 @@
 package ru.adkazankov.scienceconference.control
 
-import javafx.event.ActionEvent
-
 interface CrudController {
     
-    fun onAddAction(event: ActionEvent) 
+    fun onAddAction(): Unit?
 
-    fun onDeleteAction(event: ActionEvent) 
+    fun onDeleteAction(): Unit?
 
-    fun onEditAction(event: ActionEvent) 
+    fun onEditAction(): Unit?
 
-    fun onFilterAction(event: ActionEvent) 
+    fun onFilterAction() 
 
-    fun onLoadAction(event: ActionEvent)
+    fun onLoadAction()
     
-    fun onRefreshAction(event: ActionEvent)
+    fun onRefreshAction()
     
-    fun onSaveAction(event: ActionEvent) 
+    fun onSaveAction() 
 
 }

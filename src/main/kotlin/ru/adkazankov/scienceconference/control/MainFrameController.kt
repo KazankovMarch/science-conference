@@ -1,17 +1,9 @@
 package ru.adkazankov.scienceconference.control
 
-import javafx.event.ActionEvent
 import javafx.fxml.FXML
-import javafx.fxml.Initializable
 import javafx.scene.control.Tab
 import javafx.scene.control.TabPane
-import javafx.scene.layout.HBox
-import org.springframework.stereotype.Controller
-import javafx.scene.layout.VBox
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
-import java.net.URL
-import java.util.*
 import javax.annotation.PostConstruct
 
 class MainFrameController {
@@ -32,23 +24,17 @@ class MainFrameController {
             tabControllers.filter { tabPane.selectionModel.selectedItem.content == it.content }.first()
 
     @FXML
-    fun onAddAction(event: ActionEvent) = selectedTabController().onAddAction(event)
-
+    fun onAddAction() = selectedTabController().onAddAction()
     @FXML
-    fun onDeleteAction(event: ActionEvent) = selectedTabController().onDeleteAction(event)
-
+    fun onDeleteAction() = selectedTabController().onDeleteAction()
     @FXML
-    fun onEditAction(event: ActionEvent) = selectedTabController().onEditAction(event)
-
+    fun onEditAction() = selectedTabController().onEditAction()
     @FXML
-    fun onFilterAction(event: ActionEvent) = selectedTabController().onFilterAction(event)
-
+    fun onFilterAction() = selectedTabController().onFilterAction()
     @FXML
-    fun onLoadAction(event: ActionEvent) = selectedTabController().onLoadAction(event)
-
+    fun onLoadAction() = selectedTabController().onLoadAction()
     @FXML
-    fun onRefreshAction(event: ActionEvent) = selectedTabController().onRefreshAction(event)
-
+    fun onRefreshAction() = selectedTabController().onRefreshAction()
     @FXML
-    fun onSaveAction(event: ActionEvent) = selectedTabController().onSaveAction(event)
+    fun onSaveAction() = selectedTabController().onSaveAction()
 }

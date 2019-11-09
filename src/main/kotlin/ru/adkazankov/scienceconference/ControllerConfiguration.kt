@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.jpa.repository.JpaRepository
 import ru.adkazankov.scienceconference.control.AbstractTabController
+import ru.adkazankov.scienceconference.control.EditFrameController
 import ru.adkazankov.scienceconference.control.MainFrameController
 import ru.adkazankov.scienceconference.domain.Auditory
 import ru.adkazankov.scienceconference.domain.Person
@@ -27,13 +28,15 @@ class ControllerConfiguration {
     fun getAuditoryTab(): View = loadView(ABSTRACT_TAB_FRAME)
     @Bean
     fun getAuditoryTabController(
-            @Autowired jpaRepository: JpaRepository<Auditory, Long>
+            @Autowired jpaRepository: JpaRepository<Auditory, Long>,
+            @Autowired editFrameController: EditFrameController<Auditory>
     ): AbstractTabController<Auditory> {
         val controller = getAuditoryTab().controller as AbstractTabController<Auditory>
         return controller.apply {
-            entityType = Auditory::class.java
-            name = "Auditories"
-            repository = jpaRepository
+            this.entityType = Auditory::class.java
+            this.name = "Auditories"
+            this.repository = jpaRepository
+            this.editFrameController = editFrameController
         }
     }
 
@@ -42,13 +45,15 @@ class ControllerConfiguration {
     fun getPersonTab(): View = loadView(ABSTRACT_TAB_FRAME)
     @Bean
     fun getPersonTabController(
-            @Autowired jpaRepository: JpaRepository<Person, Long>
+            @Autowired jpaRepository: JpaRepository<Person, Long>,
+            @Autowired editFrameController: EditFrameController<Person>
     ): AbstractTabController<Person> {
         val controller = getPersonTab ().controller as AbstractTabController<Person>
         return controller.apply {
-            entityType = Person::class.java
-            name = "Persons"
-            repository = jpaRepository
+            this.entityType = Person::class.java
+            this.name = "Persons"
+            this.repository = jpaRepository
+            this.editFrameController = editFrameController
         }
     }
 

@@ -1,20 +1,15 @@
 package ru.adkazankov.scienceconference.control
 
-import javafx.event.ActionEvent
 import javafx.fxml.FXML
-import javafx.fxml.Initializable
 import javafx.scene.control.CheckBox
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableView
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.VBox
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.stereotype.Controller
+import ru.adkazankov.scienceconference.util.showError
 import java.lang.reflect.Field
-import java.net.URL
-import java.util.*
 import javax.annotation.PostConstruct
 
 
@@ -23,6 +18,7 @@ class AbstractTabController<T>: CrudController {
     lateinit var entityType: Class<T>
     lateinit var name: String
     lateinit var repository: JpaRepository<T, *>
+    lateinit var editFrameController: EditFrameController<T>
 
     @FXML
     lateinit var content: AnchorPane
@@ -34,7 +30,6 @@ class AbstractTabController<T>: CrudController {
 
     @PostConstruct
     fun postConstruct(){
-        println("POSTCONSTRUCT")
         entityType.declaredFields.forEach {field ->
             val checkbox = CheckBox(field.name)
             checkbox.isSelected = true
@@ -45,9 +40,10 @@ class AbstractTabController<T>: CrudController {
             showColumnVBox.children.add(checkbox)
 
             val tableColumn: TableColumn<T, String> = TableColumn(field.name)
-            tableColumn.setCellValueFactory ( PropertyValueFactory(field.name) )
+            tableColumn.cellValueFactory = PropertyValueFactory(field.name)
             tableView.columns.add(tableColumn)
         }
+        onRefreshAction()
     }
 
     private fun setFieldVisible(newValue: Boolean, field: Field) {
@@ -55,29 +51,46 @@ class AbstractTabController<T>: CrudController {
         column.isVisible = newValue
     }
 
-    private fun selectedEntity(): T? = tableView.selectionModel.selectedItem
+    private fun selectedEntity(): T? = tableView.selectionModel?.selectedItem
 
-    override fun onAddAction(event: ActionEvent) {
+    override fun onAddAction() = editFrameController.newEntity()?.let{
+        try{
+            repository.save(it)
+            onRefreshAction()
+        }catch (e: Exception){
+            showError(main = e.toString())
+        }
+    }
+
+    override fun onDeleteAction() = selectedEntity()?.let {
+        try{
+            repository.delete(it)
+            onRefreshAction()
+        }catch (e: Exception){
+            showError(main = e.toString())
+        }
+    }
+
+    override fun onEditAction() = selectedEntity()?.let {
+        try{
+            editFrameController.editEntity(it)?.let {
+                repository.save(it)
+                onRefreshAction()
+            }
+        }catch (e: Exception){
+            showError(main = e.toString())
+        }
+    }
+
+    override fun onFilterAction() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onDeleteAction(event: ActionEvent) {
+    override fun onLoadAction() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onEditAction(event: ActionEvent) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onFilterAction(event: ActionEvent) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onLoadAction(event: ActionEvent) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onRefreshAction(event: ActionEvent) {
+    override fun onRefreshAction() {
         tableView.items.clear()
         tableView.items.addAll(
                 repository.findAll()
@@ -85,7 +98,7 @@ class AbstractTabController<T>: CrudController {
         tableView.refresh()
     }
 
-    override fun onSaveAction(event: ActionEvent) {
+    override fun onSaveAction() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
