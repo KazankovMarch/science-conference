@@ -1,4 +1,4 @@
-package ru.adkazankov.scienceconference.control
+package ru.adkazankov.scienceconference.control.edit
 
 import javafx.scene.control.Label
 import javafx.scene.control.TextField

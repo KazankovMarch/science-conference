@@ -7,9 +7,10 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.jpa.repository.JpaRepository
 import ru.adkazankov.scienceconference.control.AbstractTabController
-import ru.adkazankov.scienceconference.control.EditFrameController
 import ru.adkazankov.scienceconference.control.MainFrameController
+import ru.adkazankov.scienceconference.control.edit.EditFrameController
 import ru.adkazankov.scienceconference.domain.Auditory
+import ru.adkazankov.scienceconference.domain.Company
 import ru.adkazankov.scienceconference.domain.Person
 import java.io.IOException
 
@@ -23,6 +24,26 @@ class ControllerConfiguration {
             @Autowired auditoryTabController: AbstractTabController<Auditory>,
             @Autowired personTabController: AbstractTabController<Person>
     )= listOf(auditoryTabController,personTabController)
+
+
+    @Bean("companyTab")
+    fun getCompanyTab(): View = loadView(ABSTRACT_TAB_FRAME)
+    @Bean
+    fun getCompanyTabController(
+            @Autowired jpaRepository: JpaRepository<Company, Long>,
+            @Autowired editFrameController: EditFrameController<Company>
+    ): AbstractTabController<Company> {
+        val controller = getCompanyTab().controller as AbstractTabController<Company>
+        return controller.apply {
+            this.entityType = Company::class.java
+            this.name = "Companies"
+            this.repository = jpaRepository
+            this.editFrameController = editFrameController
+        }
+    }
+
+
+
 
     @Bean("auditoryTab")
     fun getAuditoryTab(): View = loadView(ABSTRACT_TAB_FRAME)

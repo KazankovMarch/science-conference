@@ -5,10 +5,9 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
-open class Person {
+open class Company {
     @Id
-    @GeneratedValue(generator = "person_id_seq")
+    @GeneratedValue(generator = "company_id_seq")
     open var id: Long? = null
-    open var fio: String? = null
-    open var email: String? = null
+    open var name: String? = null
 }

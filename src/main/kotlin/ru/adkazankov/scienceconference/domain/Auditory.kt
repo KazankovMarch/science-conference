@@ -8,7 +8,7 @@ import javax.persistence.Id
 open class Auditory {
     @Id
     @GeneratedValue(generator = "auditory_id_seq")
-    var id: Long? = null
-    var address: String? = null
-    var audienceMaxCount: Int? = null
+    open var id: Long? = null
+    open var address: String? = null
+    open var audienceMaxCount: Int? = null
 }

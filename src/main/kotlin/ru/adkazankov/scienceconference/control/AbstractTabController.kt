@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.VBox
 import org.springframework.data.jpa.repository.JpaRepository
+import ru.adkazankov.scienceconference.control.edit.EditFrameController
 import ru.adkazankov.scienceconference.util.showError
 import java.lang.reflect.Field
 import javax.annotation.PostConstruct
