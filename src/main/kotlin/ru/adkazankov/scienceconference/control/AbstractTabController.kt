@@ -15,13 +15,14 @@ import org.springframework.stereotype.Controller
 import java.lang.reflect.Field
 import java.net.URL
 import java.util.*
-
-@Controller
-abstract class AbstractTabController<T>: CrudController, Initializable {
+import javax.annotation.PostConstruct
 
 
-    abstract val entityType: Class<T>
-    abstract val name: String
+class AbstractTabController<T>: CrudController {
+
+    lateinit var entityType: Class<T>
+    lateinit var name: String
+    lateinit var repository: JpaRepository<T, *>
 
     @FXML
     lateinit var content: AnchorPane
@@ -29,10 +30,11 @@ abstract class AbstractTabController<T>: CrudController, Initializable {
     private lateinit var showColumnVBox: VBox
     @FXML
     private lateinit var tableView: TableView<T>
-    @Autowired
-    private lateinit var repository: JpaRepository<T, *>
 
-    override fun initialize(location: URL?, resources: ResourceBundle?) {
+
+    @PostConstruct
+    fun postConstruct(){
+        println("POSTCONSTRUCT")
         entityType.declaredFields.forEach {field ->
             val checkbox = CheckBox(field.name)
             checkbox.isSelected = true
