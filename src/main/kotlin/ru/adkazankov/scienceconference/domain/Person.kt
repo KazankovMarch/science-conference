@@ -11,4 +11,9 @@ open class Person {
     open var id: Long? = null
     open var fio: String? = null
     open var email: String? = null
+    override fun toString(): String {
+        return "Person(id=$id, fio=$fio, email=$email)"
+    }
+
+
 }

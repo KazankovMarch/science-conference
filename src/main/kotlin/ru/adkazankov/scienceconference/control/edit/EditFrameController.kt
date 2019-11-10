@@ -11,7 +11,7 @@ import javafx.stage.Modality
 import javafx.stage.Stage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
-import ru.adkazankov.scienceconference.ControllerConfiguration
+import ru.adkazankov.scienceconference.control.ControllerConfiguration
 import ru.adkazankov.scienceconference.util.showError
 import java.lang.reflect.Field
 
@@ -78,7 +78,7 @@ abstract class EditFrameController<T> {
         return this.entity
     }
 
-    abstract fun createInterfaceFields(gridPane: GridPane, entity: T?)
+    abstract fun createInterfaceFields(gridPane: GridPane, nullableEntity: T?)
 
     private fun close(event: ActionEvent) {
         ((event.source as Button).scene.window as Stage).close()

@@ -1,4 +1,4 @@
-package ru.adkazankov.scienceconference
+package ru.adkazankov.scienceconference.control
 
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.jpa.repository.JpaRepository
-import ru.adkazankov.scienceconference.control.AbstractTabController
-import ru.adkazankov.scienceconference.control.MainFrameController
 import ru.adkazankov.scienceconference.control.edit.EditFrameController
 import ru.adkazankov.scienceconference.domain.Auditory
 import ru.adkazankov.scienceconference.domain.Company
 import ru.adkazankov.scienceconference.domain.Person
+import ru.adkazankov.scienceconference.domain.Speaker
 import java.io.IOException
 
 private const val ABSTRACT_TAB_FRAME = "view.fxml/AbstractTab.fxml"
@@ -24,6 +23,23 @@ class ControllerConfiguration {
             @Autowired auditoryTabController: AbstractTabController<Auditory>,
             @Autowired personTabController: AbstractTabController<Person>
     )= listOf(auditoryTabController,personTabController)
+
+
+    @Bean("speakerTab")
+    fun getSpeakerTab(): View = loadView(ABSTRACT_TAB_FRAME)
+    @Bean
+    fun getSpeakerTabController(
+            @Autowired jpaRepository: JpaRepository<Speaker, Long>,
+            @Autowired editFrameController: EditFrameController<Speaker>
+    ): AbstractTabController<Speaker> {
+        val controller = getSpeakerTab().controller as AbstractTabController<Speaker>
+        return controller.apply {
+            this.entityType = Speaker::class.java
+            this.name = "Speakers"
+            this.repository = jpaRepository
+            this.editFrameController = editFrameController
+        }
+    }
 
 
     @Bean("companyTab")
@@ -41,8 +57,6 @@ class ControllerConfiguration {
             this.editFrameController = editFrameController
         }
     }
-
-
 
 
     @Bean("auditoryTab")
