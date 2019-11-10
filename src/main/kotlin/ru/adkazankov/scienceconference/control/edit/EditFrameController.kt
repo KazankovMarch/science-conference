@@ -55,21 +55,22 @@ abstract class EditFrameController<T> {
     fun  newEntity(): T? = editEntity(null)
 
     fun  editEntity(entity: T?): T? {
+        val saveButton = Button("save").apply {
+            onAction = EventHandler { save(it) }
+        }
+        val cancelButton = Button("cancel").apply {
+            onAction = EventHandler { cancel(it) }
+        }
+        val gridPane = GridPane().apply {
+            addColumn(0, cancelButton)
+            addColumn(1, saveButton)
+            createInterfaceFields(this, entity)
+        }
+        val root = Group().apply {
+            children.add(gridPane)
+        }
         Stage().apply {
             title = entity?.toString() ?: "New Entity"
-            val root = Group()
-            val saveButton = Button("save").apply {
-                onAction = EventHandler { save(it) }
-            }
-            val cancelButton = Button("cancel").apply {
-                onAction = EventHandler { cancel(it) }
-            }
-            val gridPane = GridPane().apply {
-                addColumn(0, cancelButton)
-                addColumn(1, saveButton)
-            }
-            createInterfaceFields(gridPane, entity)
-            root.children.add(gridPane)
             scene = Scene(root)
             isResizable = true
             centerOnScreen()

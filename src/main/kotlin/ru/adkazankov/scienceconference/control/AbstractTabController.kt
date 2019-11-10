@@ -7,6 +7,7 @@ import javafx.scene.control.TableView
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.VBox
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.jpa.repository.JpaRepository
 import ru.adkazankov.scienceconference.control.edit.EditFrameController
 import ru.adkazankov.scienceconference.util.showError
@@ -16,10 +17,12 @@ import javax.annotation.PostConstruct
 
 class AbstractTabController<T>: CrudController {
 
+    @Autowired
+    lateinit var saveLoadController: SaveLoadController
+    lateinit var editFrameController: EditFrameController<T>
     lateinit var entityType: Class<T>
     lateinit var name: String
     lateinit var repository: JpaRepository<T, *>
-    lateinit var editFrameController: EditFrameController<T>
 
     @FXML
     lateinit var content: AnchorPane
@@ -87,8 +90,11 @@ class AbstractTabController<T>: CrudController {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onLoadAction() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onLoadAction()  = try {
+        saveLoadController.load(entityType)
+        onRefreshAction()
+    }catch (e: Exception){
+        showError(main = e.toString())
     }
 
     override fun onRefreshAction() {
@@ -99,7 +105,10 @@ class AbstractTabController<T>: CrudController {
         tableView.refresh()
     }
 
-    override fun onSaveAction() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onSaveAction() = try {
+        saveLoadController.save(entityType, tableView.items)
+        onRefreshAction()
+    }catch (e: Exception){
+        showError(main = e.toString())
     }
 }
