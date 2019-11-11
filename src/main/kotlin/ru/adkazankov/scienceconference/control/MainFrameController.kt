@@ -4,24 +4,31 @@ import javafx.fxml.FXML
 import javafx.scene.control.Tab
 import javafx.scene.control.TabPane
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import javax.annotation.PostConstruct
 
 class MainFrameController {
 
     @Autowired
-    private lateinit var tabControllers: List<AbstractTabController<*>>
+    private lateinit var entityTabControllers: List<AbstractEntityTabController<*>>
+    @Autowired
+    @Qualifier("selectTab")
+    private lateinit var selectView: ControllerConfiguration.View
     @FXML
     private lateinit var tabPane: TabPane
+    @FXML
+    private lateinit var queryTab: Tab
 
     @PostConstruct
     private fun init(){
-        tabControllers.forEach {
+        entityTabControllers.forEach {
             tabPane.tabs.add(Tab(it.name, it.content))
         }
+        queryTab.content = selectView.parent
     }
 
     private fun selectedTabController() =
-            tabControllers.filter { tabPane.selectionModel.selectedItem.content == it.content }.firstOrNull()
+            entityTabControllers.filter { tabPane.selectionModel.selectedItem.content == it.content }.firstOrNull()
 
     @FXML
     fun onAddAction() = selectedTabController()?.onAddAction()

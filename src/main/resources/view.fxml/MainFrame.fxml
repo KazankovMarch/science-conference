@@ -6,7 +6,7 @@
    <children>
       <TabPane fx:id="tabPane" layoutX="92.0" layoutY="36.0" prefHeight="478.0" prefWidth="574.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
         <tabs>
-            <Tab fx:id="queryTab" closable="false" text="SELECT" />
+            <Tab fx:id="queryTab" closable="false" text="SELECT"/>
         </tabs>
       </TabPane>
       <ToolBar prefHeight="22.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

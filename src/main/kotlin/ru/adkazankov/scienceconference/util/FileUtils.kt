@@ -1,10 +1,44 @@
 package ru.adkazankov.scienceconference.util
 
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 import java.io.File
 import java.io.FileWriter
 import java.lang.reflect.Field
 import java.util.*
 import javax.persistence.Id
+
+@Component
+class Importer {
+
+    @Autowired
+    private lateinit var dbWork: DbWork
+
+
+    fun <T> importFromFile(file: File, entityType: Class<T>, delimiter: String) = Scanner(file).use { scanner ->
+        while (scanner.hasNext()) {
+            val line = scanner.nextLine()
+            val fields = line.subSequence(0, line.length - 1).split(delimiter)
+            val sqlBuilder = StringBuilder("INSERT INTO ${entityType.name.split(".").last()} VALUES (")
+            fields.forEach {
+                val field = if (it.isEmpty()) {
+                    if (sqlBuilder.last() == '(') {
+                        "DEFAULT"
+                    } else {
+                        null
+                    }
+                } else {
+                    "\'$it\'"
+                }
+                sqlBuilder.append("$field,")
+            }
+            sqlBuilder.setLength(sqlBuilder.length - 1)
+            sqlBuilder.append(")")
+            dbWork.executeUpdate(sqlBuilder.toString())
+        }
+    }
+}
+
 
 fun <T> exportToFile(
         file: File, entities: List<T>, entityType: Class<T>, delimiter: String
@@ -20,10 +54,9 @@ private fun <T> serializeEntity(entity: T, entityType: Class<T>, delimiter: Stri
     val builder = StringBuilder()
     entityType.declaredFields.forEach {
         it.isAccessible = true
-        if(it.type.isCustom()){
+        if (it.type.isCustom()) {
             builder.append(it.getId(entity))
-        }
-        else{
+        } else {
             builder.append(it.get(entity)?.toString())
         }
         builder.append(delimiter)
@@ -40,7 +73,6 @@ private fun Class<*>.isCustom(): Boolean {
 }
 
 
-
 private fun <T> Field.getId(entity: T): Long {
     this.isAccessible = true
     type.declaredFields.forEach {
@@ -49,27 +81,4 @@ private fun <T> Field.getId(entity: T): Long {
         if (id != null) return it.get(this.get(entity)) as Long
     }
     throw IllegalArgumentException()
-}
-fun <T> importFromFile(file: File, entityType: Class<T>, delimiter: String)
-        = Scanner(file).use {scanner ->
-    while(scanner.hasNext()){
-        val line = scanner.nextLine()
-        val fields = line.subSequence(0, line.length - 1).split(delimiter)
-        val sqlBuilder = StringBuilder("INSERT INTO ${entityType.name.split(".").last()} VALUES (")
-        fields.forEach {
-            val field = if(it.isEmpty()){
-                if(sqlBuilder.last() == '('){
-                    "DEFAULT"
-                } else {
-                    null
-                }
-            } else {
-                "\'$it\'"
-            }
-            sqlBuilder.append("$field,")
-        }
-        sqlBuilder.setLength(sqlBuilder.length - 1)
-        sqlBuilder.append(")")
-        DbWork.getInstance().executeUpdate(sqlBuilder.toString())
-    }
 }

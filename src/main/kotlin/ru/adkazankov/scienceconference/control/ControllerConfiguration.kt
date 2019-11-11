@@ -17,8 +17,8 @@ class ControllerConfiguration {
 
     @Bean("tabControllers")
     fun getTabControllers(
-            @Autowired auditoryTabController: AbstractTabController<Auditory>,
-            @Autowired personTabController: AbstractTabController<Person>
+            @Autowired auditoryTabController: AbstractEntityTabController<Auditory>,
+            @Autowired personTabController: AbstractEntityTabController<Person>
     )= listOf(auditoryTabController,personTabController)
 
 
@@ -28,8 +28,8 @@ class ControllerConfiguration {
     fun getTicketTabController(
             @Autowired jpaRepository: JpaRepository<Ticket, Long>,
             @Autowired abstractEditFrameController: AbstractEditFrameController<Ticket>
-    ): AbstractTabController<Ticket> {
-        val controller = getTicketTab().controller as AbstractTabController<Ticket>
+    ): AbstractEntityTabController<Ticket> {
+        val controller = getTicketTab().controller as AbstractEntityTabController<Ticket>
         return controller.apply {
             this.entityType = Ticket::class.java
             this.name = "Tickets"
@@ -45,8 +45,8 @@ class ControllerConfiguration {
     fun getPresentationTabController(
             @Autowired jpaRepository: JpaRepository<Presentation, Long>,
             @Autowired abstractEditFrameController: AbstractEditFrameController<Presentation>
-    ): AbstractTabController<Presentation> {
-        val controller = getPresentationTab().controller as AbstractTabController<Presentation>
+    ): AbstractEntityTabController<Presentation> {
+        val controller = getPresentationTab().controller as AbstractEntityTabController<Presentation>
         return controller.apply {
             this.entityType = Presentation::class.java
             this.name = "Presentations"
@@ -61,8 +61,8 @@ class ControllerConfiguration {
     fun getSpeakerTabController(
             @Autowired jpaRepository: JpaRepository<Speaker, Long>,
             @Autowired abstractEditFrameController: AbstractEditFrameController<Speaker>
-    ): AbstractTabController<Speaker> {
-        val controller = getSpeakerTab().controller as AbstractTabController<Speaker>
+    ): AbstractEntityTabController<Speaker> {
+        val controller = getSpeakerTab().controller as AbstractEntityTabController<Speaker>
         return controller.apply {
             this.entityType = Speaker::class.java
             this.name = "Speakers"
@@ -78,8 +78,8 @@ class ControllerConfiguration {
     fun getCompanyTabController(
             @Autowired jpaRepository: JpaRepository<Company, Long>,
             @Autowired abstractEditFrameController: AbstractEditFrameController<Company>
-    ): AbstractTabController<Company> {
-        val controller = getCompanyTab().controller as AbstractTabController<Company>
+    ): AbstractEntityTabController<Company> {
+        val controller = getCompanyTab().controller as AbstractEntityTabController<Company>
         return controller.apply {
             this.entityType = Company::class.java
             this.name = "Companies"
@@ -95,8 +95,8 @@ class ControllerConfiguration {
     fun getAuditoryTabController(
             @Autowired jpaRepository: JpaRepository<Auditory, Long>,
             @Autowired abstractEditFrameController: AbstractEditFrameController<Auditory>
-    ): AbstractTabController<Auditory> {
-        val controller = getAuditoryTab().controller as AbstractTabController<Auditory>
+    ): AbstractEntityTabController<Auditory> {
+        val controller = getAuditoryTab().controller as AbstractEntityTabController<Auditory>
         return controller.apply {
             this.entityType = Auditory::class.java
             this.name = "Auditories"
@@ -112,8 +112,8 @@ class ControllerConfiguration {
     fun getPersonTabController(
             @Autowired jpaRepository: JpaRepository<Person, Long>,
             @Autowired abstractEditFrameController: AbstractEditFrameController<Person>
-    ): AbstractTabController<Person> {
-        val controller = getPersonTab ().controller as AbstractTabController<Person>
+    ): AbstractEntityTabController<Person> {
+        val controller = getPersonTab ().controller as AbstractEntityTabController<Person>
         return controller.apply {
             this.entityType = Person::class.java
             this.name = "Persons"
@@ -121,6 +121,16 @@ class ControllerConfiguration {
             this.abstractEditFrameController = abstractEditFrameController
         }
     }
+
+    @Bean("selectTab")
+    fun getSelectTab(): View = loadView("view.fxml/SelectTab.fxml")
+    @Bean
+    fun getSelectTabController(): SelectTabController {
+        val controller = getSelectTab().controller as SelectTabController
+        return controller
+    }
+
+
 
     @Bean("mainFrame")
     @Throws(IOException::class)

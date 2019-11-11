@@ -18,10 +18,13 @@ import javax.annotation.PostConstruct
 import javax.persistence.Id
 
 
-class AbstractTabController<T>: CrudController {
+class AbstractEntityTabController<T>: CrudController {
 
     @Autowired
     lateinit var saveLoadController: SaveLoadController
+    @Autowired
+    lateinit var dbWork: DbWork
+
     lateinit var abstractEditFrameController: AbstractEditFrameController<T>
     lateinit var entityType: Class<T>
     lateinit var name: String
@@ -93,7 +96,7 @@ class AbstractTabController<T>: CrudController {
         TextInputDialog().showAndWait().ifPresent{
             if(it=="") return@ifPresent
             val sql = "SELECT * FROM ${entityType.name.split(".").last()} WHERE $it"
-            val result = DbWork.getInstance().executeQuery(sql)
+            val result = dbWork.executeQuery(sql)
             val set = HashSet<Long>()
             while (result.next()){
                 set.add(result.getLong(1))

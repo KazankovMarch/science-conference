@@ -10,13 +10,17 @@ import javafx.scene.layout.GridPane
 import javafx.stage.FileChooser
 import javafx.stage.Modality
 import javafx.stage.Stage
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
+import ru.adkazankov.scienceconference.util.Importer
 import ru.adkazankov.scienceconference.util.exportToFile
-import ru.adkazankov.scienceconference.util.importFromFile
 import ru.adkazankov.scienceconference.util.showError
 
 @Controller
 class SaveLoadController {
+
+    @Autowired
+    private lateinit var importer: Importer
 
     private val delimiterField = TextField(";")
     private val fileChooser = FileChooser()
@@ -43,7 +47,7 @@ class SaveLoadController {
             } else{
                 val file = fileChooser.showOpenDialog(okButton.scene.window)
                 if(file!=null){
-                    importFromFile(file, entityType, delimiterField.text)
+                    importer.importFromFile(file, entityType, delimiterField.text)
                     close()
                 }
             }

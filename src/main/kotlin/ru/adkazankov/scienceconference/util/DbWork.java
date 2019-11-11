@@ -1,21 +1,15 @@
 package ru.adkazankov.scienceconference.util;
 
+import org.springframework.stereotype.Component;
+
 import java.sql.*;
 
+@Component
 public class DbWork {
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/conference";
     private static final String DB_USER = "postgres";
     private static final String DB_PASS = "root";
-    private static DbWork ourInstance = new DbWork();
     private Connection connection;
-
-
-    public static DbWork getInstance() {
-        return ourInstance;
-    }
-
-    private DbWork() {
-    }
 
     private Connection getConnection() throws SQLException {
         if (connection == null || connection.isClosed()){
