@@ -1,0 +1,22 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    
+    <changeSet id="db.changelog-7-restart-sequences" author="adkazankov">
+        <preConditions>
+            <tableExists tableName="person"/>
+            <tableExists tableName="presentation"/>
+            <tableExists tableName="ticket"/>
+        </preConditions>
+        <sql>
+<![CDATA[
+ALTER SEQUENCE auditory_id_seq RESTART WITH 100;
+ALTER SEQUENCE company_id_seq RESTART WITH 100;
+ALTER SEQUENCE person_id_seq RESTART WITH 100;
+ALTER SEQUENCE presentation_id_seq RESTART WITH 100;
+ALTER SEQUENCE ticket_id_seq RESTART WITH 100;
+]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>
