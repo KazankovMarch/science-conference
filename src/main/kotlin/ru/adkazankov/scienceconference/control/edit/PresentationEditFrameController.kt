@@ -53,7 +53,7 @@ class PresentationEditFrameController : AbstractEditFrameController<Presentation
         auditoryBox = ComboBox<Auditory>().apply {
             val items = FXCollections.observableArrayList(auditoryRepository.findAll())
             setItems(items)
-            selectionModel.select(items.firstOrNull{it == presentation.auditory})
+            selectionModel.select(items.firstOrNull{it.id == presentation.auditory?.id})
         }
         gridPane.apply {
             addRow(1, Label("id"), idField)

@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.VBox
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.transaction.annotation.Transactional
 import ru.adkazankov.scienceconference.control.edit.AbstractEditFrameController
 import ru.adkazankov.scienceconference.util.DbWork
 import ru.adkazankov.scienceconference.util.showError
@@ -18,7 +19,7 @@ import java.lang.reflect.Field
 import javax.annotation.PostConstruct
 import javax.persistence.Id
 
-
+@Transactional
 class AbstractEntityTabController<T>: CrudController {
 
     @Autowired
@@ -93,6 +94,7 @@ class AbstractEntityTabController<T>: CrudController {
             }
         }catch (e: Exception){
             showError(main = e.toString())
+            e.printStackTrace()
         }
     }
 

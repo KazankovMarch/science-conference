@@ -11,11 +11,12 @@ import javafx.stage.Modality
 import javafx.stage.Stage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.transaction.annotation.Transactional
 import ru.adkazankov.scienceconference.control.ControllerConfiguration
 import ru.adkazankov.scienceconference.util.showError
 import java.lang.reflect.Field
 
-
+@Transactional
 abstract class AbstractEditFrameController<T> {
 
     @Autowired
