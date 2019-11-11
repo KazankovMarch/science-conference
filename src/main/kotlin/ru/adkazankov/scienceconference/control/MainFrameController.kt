@@ -21,20 +21,20 @@ class MainFrameController {
     }
 
     private fun selectedTabController() =
-            tabControllers.filter { tabPane.selectionModel.selectedItem.content == it.content }.first()
+            tabControllers.filter { tabPane.selectionModel.selectedItem.content == it.content }.firstOrNull()
 
     @FXML
-    fun onAddAction() = selectedTabController().onAddAction()
+    fun onAddAction() = selectedTabController()?.onAddAction()
     @FXML
-    fun onDeleteAction() = selectedTabController().onDeleteAction()
+    fun onDeleteAction() = selectedTabController()?.onDeleteAction()
     @FXML
-    fun onEditAction() = selectedTabController().onEditAction()
+    fun onEditAction() = selectedTabController()?.onEditAction()
     @FXML
-    fun onFilterAction() = selectedTabController().onFilterAction()
+    fun onFilterAction() = selectedTabController()?.onFilterAction()
     @FXML
-    fun onLoadAction() = selectedTabController().onLoadAction()
+    fun onLoadAction() = selectedTabController()?.onLoadAction()
     @FXML
-    fun onRefreshAction() = selectedTabController().onRefreshAction()
+    fun onRefreshAction() = selectedTabController()?.onRefreshAction()
     @FXML
-    fun onSaveAction() = selectedTabController().onSaveAction()
+    fun onSaveAction() = selectedTabController()?.onSaveAction()
 }
