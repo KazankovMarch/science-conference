@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import ru.adkazankov.scienceconference.control.edit.AbstractEditFrameController
 import ru.adkazankov.scienceconference.util.DbWork
 import ru.adkazankov.scienceconference.util.showError
+import ru.adkazankov.scienceconference.util.showInfo
 import java.lang.reflect.Field
 import javax.annotation.PostConstruct
 import javax.persistence.Id
@@ -67,6 +68,7 @@ class AbstractEntityTabController<T>: CrudController {
         try{
             repository.save(it)
             onRefreshAction()
+            showInfo("adding successful")
         }catch (e: Exception){
             showError(main = e.toString())
         }
@@ -76,6 +78,7 @@ class AbstractEntityTabController<T>: CrudController {
         try{
             repository.delete(it)
             onRefreshAction()
+            showInfo("deleting successful")
         }catch (e: Exception){
             showError(main = e.toString())
         }
@@ -86,6 +89,7 @@ class AbstractEntityTabController<T>: CrudController {
             abstractEditFrameController.editEntity(it)?.let {
                 repository.save(it)
                 onRefreshAction()
+                showInfo("Editing successful")
             }
         }catch (e: Exception){
             showError(main = e.toString())
@@ -112,6 +116,7 @@ class AbstractEntityTabController<T>: CrudController {
     override fun onLoadAction()  = try {
         saveLoadController.load(entityType)
         onRefreshAction()
+        showInfo("loading successful")
     }catch (e: Exception){
         showError(main = e.toString())
     }
@@ -127,6 +132,7 @@ class AbstractEntityTabController<T>: CrudController {
     override fun onSaveAction() = try {
         saveLoadController.save(entityType, tableView.items)
         onRefreshAction()
+        showInfo("saving successful")
     }catch (e: Exception){
         showError(main = e.toString())
     }

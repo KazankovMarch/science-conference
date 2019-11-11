@@ -59,7 +59,10 @@ abstract class AbstractEditFrameController<T> {
             onAction = EventHandler { save(it) }
         }
         val cancelButton = Button("cancel").apply {
-            onAction = EventHandler { cancel(it) }
+            onAction = EventHandler {
+                this@AbstractEditFrameController.entity = null
+                cancel(it)
+            }
         }
         val gridPane = GridPane().apply {
             addColumn(0, cancelButton)

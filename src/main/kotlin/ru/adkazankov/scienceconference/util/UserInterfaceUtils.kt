@@ -19,11 +19,10 @@ fun showConfirm(main: String, context: String? = null): Boolean {
     return alert.showAndWait().get() == ButtonType.OK
 }
 
-fun showInfo(main: String, context: String? = null): Boolean {
+fun showInfo(main: String, context: String? = null) {
     val alert = Alert(Alert.AlertType.INFORMATION)
     alert.title = "Information"
     alert.headerText = main
     alert.contentText = context
     alert.showAndWait()
-    return !alert.result.buttonData.isCancelButton
 }

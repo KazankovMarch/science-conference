@@ -32,7 +32,7 @@ class ControllerConfiguration {
         val controller = getTicketTab().controller as AbstractEntityTabController<Ticket>
         return controller.apply {
             this.entityType = Ticket::class.java
-            this.name = "Tickets"
+            this.name = "Ticket"
             this.repository = jpaRepository
             this.abstractEditFrameController = abstractEditFrameController
         }
@@ -49,7 +49,7 @@ class ControllerConfiguration {
         val controller = getPresentationTab().controller as AbstractEntityTabController<Presentation>
         return controller.apply {
             this.entityType = Presentation::class.java
-            this.name = "Presentations"
+            this.name = "Presentation"
             this.repository = jpaRepository
             this.abstractEditFrameController = abstractEditFrameController
         }
@@ -65,7 +65,7 @@ class ControllerConfiguration {
         val controller = getSpeakerTab().controller as AbstractEntityTabController<Speaker>
         return controller.apply {
             this.entityType = Speaker::class.java
-            this.name = "Speakers"
+            this.name = "Speaker"
             this.repository = jpaRepository
             this.abstractEditFrameController = abstractEditFrameController
         }
@@ -82,7 +82,7 @@ class ControllerConfiguration {
         val controller = getCompanyTab().controller as AbstractEntityTabController<Company>
         return controller.apply {
             this.entityType = Company::class.java
-            this.name = "Companies"
+            this.name = "Company"
             this.repository = jpaRepository
             this.abstractEditFrameController = abstractEditFrameController
         }
@@ -99,7 +99,7 @@ class ControllerConfiguration {
         val controller = getAuditoryTab().controller as AbstractEntityTabController<Auditory>
         return controller.apply {
             this.entityType = Auditory::class.java
-            this.name = "Auditories"
+            this.name = "Auditory"
             this.repository = jpaRepository
             this.abstractEditFrameController = abstractEditFrameController
         }
@@ -116,7 +116,7 @@ class ControllerConfiguration {
         val controller = getPersonTab ().controller as AbstractEntityTabController<Person>
         return controller.apply {
             this.entityType = Person::class.java
-            this.name = "Persons"
+            this.name = "Person"
             this.repository = jpaRepository
             this.abstractEditFrameController = abstractEditFrameController
         }
