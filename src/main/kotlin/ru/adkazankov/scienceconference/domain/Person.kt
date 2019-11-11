@@ -12,6 +12,6 @@ open class Person {
     open var fio: String? = null
     open var email: String? = null
     override fun toString(): String {
-        return "(id=$id, fio=$fio, email=$email)"
+        return "$fio, email=$email id=$id"
     }
 }

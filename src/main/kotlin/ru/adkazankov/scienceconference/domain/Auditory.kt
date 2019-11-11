@@ -12,7 +12,7 @@ open class Auditory {
     open var address: String? = null
     open var audienceMaxCount: Int? = null
     override fun toString(): String {
-        return "(id=$id, address=$address, audienceMaxCount=$audienceMaxCount)"
+        return "$address, max.audience=$audienceMaxCount, id=$id"
     }
 
 }

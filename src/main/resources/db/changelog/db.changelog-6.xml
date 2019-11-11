@@ -1,0 +1,14 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    
+    <changeSet id="db.changelog-6-fix-trigger" author="adkazankov">
+        <preConditions>
+            <tableExists tableName="person"/>
+            <tableExists tableName="presentation"/>
+            <tableExists tableName="ticket"/>
+        </preConditions>
+        <sqlFile path="/db/changelog/db.changelog-6-fix-trigger.sql" splitStatements="false"/>
+    </changeSet>
+</databaseChangeLog>
