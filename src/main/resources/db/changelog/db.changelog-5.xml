@@ -1,0 +1,32 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    
+    <changeSet id="db.changelog-5-rename-speaker_id" author="adkazankov">
+        <preConditions>
+            <tableExists tableName="person"/>
+            <tableExists tableName="presentation"/>
+            <tableExists tableName="ticket"/>
+        </preConditions>
+        <sql>
+<![CDATA[
+ALTER TABLE presentation RENAME COLUMN speaker_id TO speaker_person_id
+]]>
+        </sql>
+    </changeSet>
+    <changeSet id="db.changelog-5-add-id-to-tickets" author="adkazankov">
+        <preConditions>
+            <tableExists tableName="person"/>
+            <tableExists tableName="presentation"/>
+            <tableExists tableName="ticket"/>
+        </preConditions>
+        <sql>
+<![CDATA[
+ALTER TABLE ticket DROP CONSTRAINT ticket_pkey;
+ALTER TABLE ticket
+ADD COLUMN id SERIAL PRIMARY KEY 
+]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

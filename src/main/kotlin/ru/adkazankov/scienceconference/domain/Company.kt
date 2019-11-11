@@ -11,7 +11,7 @@ open class Company {
     open var id: Long? = null
     open var name: String? = null
     override fun toString(): String {
-        return "Company(id=$id, name=$name)"
+        return "(id=$id, name=$name)"
     }
 
 }

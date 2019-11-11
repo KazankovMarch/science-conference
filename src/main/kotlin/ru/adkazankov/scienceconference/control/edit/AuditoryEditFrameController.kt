@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller
 import ru.adkazankov.scienceconference.domain.Auditory
 
 @Controller
-class AuditoryEditFrameController : EditFrameController<Auditory>() {
+class AuditoryEditFrameController : AbstractEditFrameController<Auditory>() {
 
     private lateinit var audienceMaxCountField: TextField
     private lateinit var addressField: TextField

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller
 import ru.adkazankov.scienceconference.domain.Company
 
 @Controller
-class CompanyEditFrameController : EditFrameController<Company>() {
+class CompanyEditFrameController : AbstractEditFrameController<Company>() {
 
     private lateinit var company: Company
     private lateinit var nameField: TextField

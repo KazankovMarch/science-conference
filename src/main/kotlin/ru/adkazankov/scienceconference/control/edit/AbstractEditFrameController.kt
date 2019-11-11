@@ -2,10 +2,10 @@ package ru.adkazankov.scienceconference.control.edit
 
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
-import javafx.scene.Group
 import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.control.TextField
+import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.GridPane
 import javafx.stage.Modality
 import javafx.stage.Stage
@@ -16,7 +16,7 @@ import ru.adkazankov.scienceconference.util.showError
 import java.lang.reflect.Field
 
 
-abstract class EditFrameController<T> {
+abstract class AbstractEditFrameController<T> {
 
     @Autowired
     @Qualifier("mainFrame")
@@ -66,7 +66,7 @@ abstract class EditFrameController<T> {
             addColumn(1, saveButton)
             createInterfaceFields(this, entity)
         }
-        val root = Group().apply {
+        val root = AnchorPane().apply {
             children.add(gridPane)
         }
         Stage().apply {

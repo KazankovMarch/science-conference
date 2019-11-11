@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.VBox
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.jpa.repository.JpaRepository
-import ru.adkazankov.scienceconference.control.edit.EditFrameController
+import ru.adkazankov.scienceconference.control.edit.AbstractEditFrameController
 import ru.adkazankov.scienceconference.util.showError
 import java.lang.reflect.Field
 import javax.annotation.PostConstruct
@@ -19,7 +19,7 @@ class AbstractTabController<T>: CrudController {
 
     @Autowired
     lateinit var saveLoadController: SaveLoadController
-    lateinit var editFrameController: EditFrameController<T>
+    lateinit var abstractEditFrameController: AbstractEditFrameController<T>
     lateinit var entityType: Class<T>
     lateinit var name: String
     lateinit var repository: JpaRepository<T, *>
@@ -57,7 +57,7 @@ class AbstractTabController<T>: CrudController {
 
     private fun selectedEntity(): T? = tableView.selectionModel?.selectedItem
 
-    override fun onAddAction() = editFrameController.newEntity()?.let{
+    override fun onAddAction() = abstractEditFrameController.newEntity()?.let{
         try{
             repository.save(it)
             onRefreshAction()
@@ -77,7 +77,7 @@ class AbstractTabController<T>: CrudController {
 
     override fun onEditAction() = selectedEntity()?.let {
         try{
-            editFrameController.editEntity(it)?.let {
+            abstractEditFrameController.editEntity(it)?.let {
                 repository.save(it)
                 onRefreshAction()
             }

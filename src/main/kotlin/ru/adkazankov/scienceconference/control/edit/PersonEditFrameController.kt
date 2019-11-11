@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller
 import ru.adkazankov.scienceconference.domain.Person
 
 @Controller
-class PersonEditFrameController : EditFrameController<Person>() {
+class PersonEditFrameController : AbstractEditFrameController<Person>() {
 
     private lateinit var person: Person
     private lateinit var emailField: TextField

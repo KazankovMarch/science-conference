@@ -8,6 +8,10 @@ import javax.persistence.ManyToOne
 open class Speaker {
     @Id
     open var personId: Long? = null
-    @ManyToOne()
+    @ManyToOne
     open var company: Company? = null
+
+    override fun toString(): String {
+        return "(personId=$personId, company=$company)"
+    }
 }

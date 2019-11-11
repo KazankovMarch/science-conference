@@ -12,7 +12,7 @@ import ru.adkazankov.scienceconference.domain.Person
 import ru.adkazankov.scienceconference.domain.Speaker
 
 @Controller
-class SpeakerEditFrameController : EditFrameController<Speaker>() {
+class SpeakerEditFrameController : AbstractEditFrameController<Speaker>() {
 
     @Autowired
     private lateinit var companyRepository: JpaRepository<Company, Long>
