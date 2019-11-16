@@ -9,7 +9,7 @@
             <Tab fx:id="queryTab" closable="false" text="SELECT"/>
         </tabs>
       </TabPane>
-      <ToolBar prefHeight="22.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ToolBar fx:id="toolBar" prefHeight="22.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <Button mnemonicParsing="false" onAction="#onAddAction" text="Add" />
             <Button mnemonicParsing="false" onAction="#onEditAction" text="Edit" />

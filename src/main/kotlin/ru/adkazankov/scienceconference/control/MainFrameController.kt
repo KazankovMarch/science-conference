@@ -3,6 +3,7 @@ package ru.adkazankov.scienceconference.control
 import javafx.fxml.FXML
 import javafx.scene.control.Tab
 import javafx.scene.control.TabPane
+import javafx.scene.control.ToolBar
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import javax.annotation.PostConstruct
@@ -18,6 +19,8 @@ class MainFrameController {
     private lateinit var tabPane: TabPane
     @FXML
     private lateinit var queryTab: Tab
+    @FXML
+    private lateinit var toolBar: ToolBar
 
     @PostConstruct
     private fun init(){
@@ -25,6 +28,8 @@ class MainFrameController {
             tabPane.tabs.add(Tab(it.name, it.content))
         }
         queryTab.content = selectView.parent
+        queryTab.setOnSelectionChanged { toolBar.isDisable = queryTab.isSelected }
+        toolBar.isDisable = queryTab.isSelected
     }
 
     private fun selectedTabController() =
