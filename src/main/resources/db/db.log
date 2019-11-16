@@ -1,0 +1,547 @@
+2019-11-16 17:28:13.798  INFO 14209 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application on andrey-Precision-M4800 with PID 14209 (started by andrey in /home/andrey/IdeaProjects/science-conference)
+2019-11-16 17:28:13.804  INFO 14209 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to default profiles: default
+2019-11-16 17:28:15.162  INFO 14209 --- [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-11-16 17:28:15.227  INFO 14209 --- [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 57ms. Found 5 repository interfaces.
+2019-11-16 17:28:15.295  WARN 14209 --- [JavaFX-Launcher] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'jpaAuditoryRepo' and 'ru.adkazankov.scienceconference.repository.jpa.JpaAuditoryRepo' mapperInterface. Bean already defined with the same name!
+2019-11-16 17:28:15.295  WARN 14209 --- [JavaFX-Launcher] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'jpaPersonRepo' and 'ru.adkazankov.scienceconference.repository.jpa.JpaPersonRepo' mapperInterface. Bean already defined with the same name!
+2019-11-16 17:28:15.295  WARN 14209 --- [JavaFX-Launcher] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'jpaPresentationRepo' and 'ru.adkazankov.scienceconference.repository.jpa.JpaPresentationRepo' mapperInterface. Bean already defined with the same name!
+2019-11-16 17:28:15.295  WARN 14209 --- [JavaFX-Launcher] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'jpaShowRepo' and 'ru.adkazankov.scienceconference.repository.jpa.JpaShowRepo' mapperInterface. Bean already defined with the same name!
+2019-11-16 17:28:15.295  WARN 14209 --- [JavaFX-Launcher] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'jpaTicketRepo' and 'ru.adkazankov.scienceconference.repository.jpa.JpaTicketRepo' mapperInterface. Bean already defined with the same name!
+2019-11-16 17:28:15.531  INFO 14209 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-11-16 17:28:15.637  INFO 14209 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-11-16 17:28:16.089  INFO 14209 --- [JavaFX-Launcher] liquibase.executor.jvm.JdbcExecutor      : SELECT COUNT(*) FROM public.databasechangeloglock
+2019-11-16 17:28:16.090  INFO 14209 --- [JavaFX-Launcher] liquibase.executor.jvm.JdbcExecutor      : SELECT COUNT(*) FROM public.databasechangeloglock
+2019-11-16 17:28:16.092  INFO 14209 --- [JavaFX-Launcher] liquibase.executor.jvm.JdbcExecutor      : SELECT LOCKED FROM public.databasechangeloglock WHERE ID=1
+2019-11-16 17:28:16.105  INFO 14209 --- [JavaFX-Launcher] l.lockservice.StandardLockService        : Successfully acquired change log lock
+2019-11-16 17:28:17.029  INFO 14209 --- [JavaFX-Launcher] liquibase.executor.jvm.JdbcExecutor      : SELECT MD5SUM FROM public.databasechangelog WHERE MD5SUM IS NOT NULL LIMIT 1
+2019-11-16 17:28:17.030  INFO 14209 --- [JavaFX-Launcher] liquibase.executor.jvm.JdbcExecutor      : SELECT COUNT(*) FROM public.databasechangelog
+2019-11-16 17:28:17.031  INFO 14209 --- [JavaFX-Launcher] l.c.StandardChangeLogHistoryService      : Reading from public.databasechangelog
+2019-11-16 17:28:17.031  INFO 14209 --- [JavaFX-Launcher] liquibase.executor.jvm.JdbcExecutor      : SELECT * FROM public.databasechangelog ORDER BY DATEEXECUTED ASC, ORDEREXECUTED ASC
+2019-11-16 17:28:17.054  INFO 14209 --- [JavaFX-Launcher] l.lockservice.StandardLockService        : Successfully released change log lock
+2019-11-16 17:28:17.175  INFO 14209 --- [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2019-11-16 17:28:17.237  INFO 14209 --- [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.6.Final}
+2019-11-16 17:28:17.442  INFO 14209 --- [JavaFX-Launcher] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2019-11-16 17:28:17.737  INFO 14209 --- [JavaFX-Launcher] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2019-11-16 17:28:18.375  INFO 14209 --- [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2019-11-16 17:28:18.380  INFO 14209 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-11-16 17:28:19.217 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        auditory0_.id as id1_0_,
+        auditory0_.address as address2_0_,
+        auditory0_.audience_max_count as audience3_0_ 
+    from
+        auditory auditory0_
+2019-11-16 17:28:19.258 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_,
+        person0_.email as email2_1_,
+        person0_.fio as fio3_1_ 
+    from
+        person person0_
+2019-11-16 17:28:19.273 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        show0_.id as id1_3_,
+        show0_.auditory_id as auditory4_3_,
+        show0_.presentation_id as presenta5_3_,
+        show0_.speaker_id as speaker_6_3_,
+        show0_.time_end as time_end2_3_,
+        show0_.time_start as time_sta3_3_ 
+    from
+        show show0_
+2019-11-16 17:28:19.278 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        auditory0_.id as id1_0_0_,
+        auditory0_.address as address2_0_0_,
+        auditory0_.audience_max_count as audience3_0_0_ 
+    from
+        auditory auditory0_ 
+    where
+        auditory0_.id=?
+2019-11-16 17:28:19.283 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        presentati0_.id as id1_2_0_,
+        presentati0_.subject as subject2_2_0_,
+        presentati0_.title as title3_2_0_ 
+    from
+        presentation presentati0_ 
+    where
+        presentati0_.id=?
+2019-11-16 17:28:19.285 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:28:19.285 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        auditory0_.id as id1_0_0_,
+        auditory0_.address as address2_0_0_,
+        auditory0_.audience_max_count as audience3_0_0_ 
+    from
+        auditory auditory0_ 
+    where
+        auditory0_.id=?
+2019-11-16 17:28:19.286 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        presentati0_.id as id1_2_0_,
+        presentati0_.subject as subject2_2_0_,
+        presentati0_.title as title3_2_0_ 
+    from
+        presentation presentati0_ 
+    where
+        presentati0_.id=?
+2019-11-16 17:28:19.287 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:28:19.298 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        ticket0_.id as id1_4_,
+        ticket0_.person_id as person_i2_4_,
+        ticket0_.show_id as show_id3_4_ 
+    from
+        ticket ticket0_
+2019-11-16 17:28:19.299 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:28:19.300 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        show0_.id as id1_3_0_,
+        show0_.auditory_id as auditory4_3_0_,
+        show0_.presentation_id as presenta5_3_0_,
+        show0_.speaker_id as speaker_6_3_0_,
+        show0_.time_end as time_end2_3_0_,
+        show0_.time_start as time_sta3_3_0_,
+        auditory1_.id as id1_0_1_,
+        auditory1_.address as address2_0_1_,
+        auditory1_.audience_max_count as audience3_0_1_,
+        presentati2_.id as id1_2_2_,
+        presentati2_.subject as subject2_2_2_,
+        presentati2_.title as title3_2_2_,
+        person3_.id as id1_1_3_,
+        person3_.email as email2_1_3_,
+        person3_.fio as fio3_1_3_ 
+    from
+        show show0_ 
+    left outer join
+        auditory auditory1_ 
+            on show0_.auditory_id=auditory1_.id 
+    left outer join
+        presentation presentati2_ 
+            on show0_.presentation_id=presentati2_.id 
+    left outer join
+        person person3_ 
+            on show0_.speaker_id=person3_.id 
+    where
+        show0_.id=?
+2019-11-16 17:28:19.302 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:28:19.303 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:28:19.303 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:28:19.304 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        show0_.id as id1_3_0_,
+        show0_.auditory_id as auditory4_3_0_,
+        show0_.presentation_id as presenta5_3_0_,
+        show0_.speaker_id as speaker_6_3_0_,
+        show0_.time_end as time_end2_3_0_,
+        show0_.time_start as time_sta3_3_0_,
+        auditory1_.id as id1_0_1_,
+        auditory1_.address as address2_0_1_,
+        auditory1_.audience_max_count as audience3_0_1_,
+        presentati2_.id as id1_2_2_,
+        presentati2_.subject as subject2_2_2_,
+        presentati2_.title as title3_2_2_,
+        person3_.id as id1_1_3_,
+        person3_.email as email2_1_3_,
+        person3_.fio as fio3_1_3_ 
+    from
+        show show0_ 
+    left outer join
+        auditory auditory1_ 
+            on show0_.auditory_id=auditory1_.id 
+    left outer join
+        presentation presentati2_ 
+            on show0_.presentation_id=presentati2_.id 
+    left outer join
+        person person3_ 
+            on show0_.speaker_id=person3_.id 
+    where
+        show0_.id=?
+2019-11-16 17:28:19.305 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:28:19.306 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        show0_.id as id1_3_0_,
+        show0_.auditory_id as auditory4_3_0_,
+        show0_.presentation_id as presenta5_3_0_,
+        show0_.speaker_id as speaker_6_3_0_,
+        show0_.time_end as time_end2_3_0_,
+        show0_.time_start as time_sta3_3_0_,
+        auditory1_.id as id1_0_1_,
+        auditory1_.address as address2_0_1_,
+        auditory1_.audience_max_count as audience3_0_1_,
+        presentati2_.id as id1_2_2_,
+        presentati2_.subject as subject2_2_2_,
+        presentati2_.title as title3_2_2_,
+        person3_.id as id1_1_3_,
+        person3_.email as email2_1_3_,
+        person3_.fio as fio3_1_3_ 
+    from
+        show show0_ 
+    left outer join
+        auditory auditory1_ 
+            on show0_.auditory_id=auditory1_.id 
+    left outer join
+        presentation presentati2_ 
+            on show0_.presentation_id=presentati2_.id 
+    left outer join
+        person person3_ 
+            on show0_.speaker_id=person3_.id 
+    where
+        show0_.id=?
+2019-11-16 17:28:19.318 DEBUG 14209 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        presentati0_.id as id1_2_,
+        presentati0_.subject as subject2_2_,
+        presentati0_.title as title3_2_ 
+    from
+        presentation presentati0_
+2019-11-16 17:28:19.574  INFO 14209 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 6.301 seconds (JVM running for 7.961)
+2019-11-16 17:28:31.823 DEBUG 14209 --- [JavaFX Application Thread] org.hibernate.SQL                        : 
+    select
+        nextval ('person_id_seq')
+2019-11-16 17:28:31.860 DEBUG 14209 --- [JavaFX Application Thread] org.hibernate.SQL                        : 
+    insert 
+    into
+        person
+        (email, fio, id) 
+    values
+        (?, ?, ?)
+2019-11-16 17:28:31.891 DEBUG 14209 --- [JavaFX Application Thread] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_,
+        person0_.email as email2_1_,
+        person0_.fio as fio3_1_ 
+    from
+        person person0_
+2019-11-16 17:44:43.407  INFO 6089 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Starting application on andrey-Precision-M4800 with PID 6089 (started by andrey in /home/andrey/IdeaProjects/science-conference)
+2019-11-16 17:44:43.419  INFO 6089 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : No active profile set, falling back to default profiles: default
+2019-11-16 17:44:44.470  INFO 6089 --- [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-11-16 17:44:44.536  INFO 6089 --- [JavaFX-Launcher] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 57ms. Found 5 repository interfaces.
+2019-11-16 17:44:44.596  WARN 6089 --- [JavaFX-Launcher] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'jpaAuditoryRepo' and 'ru.adkazankov.scienceconference.repository.jpa.JpaAuditoryRepo' mapperInterface. Bean already defined with the same name!
+2019-11-16 17:44:44.597  WARN 6089 --- [JavaFX-Launcher] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'jpaPersonRepo' and 'ru.adkazankov.scienceconference.repository.jpa.JpaPersonRepo' mapperInterface. Bean already defined with the same name!
+2019-11-16 17:44:44.597  WARN 6089 --- [JavaFX-Launcher] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'jpaPresentationRepo' and 'ru.adkazankov.scienceconference.repository.jpa.JpaPresentationRepo' mapperInterface. Bean already defined with the same name!
+2019-11-16 17:44:44.597  WARN 6089 --- [JavaFX-Launcher] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'jpaShowRepo' and 'ru.adkazankov.scienceconference.repository.jpa.JpaShowRepo' mapperInterface. Bean already defined with the same name!
+2019-11-16 17:44:44.597  WARN 6089 --- [JavaFX-Launcher] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'jpaTicketRepo' and 'ru.adkazankov.scienceconference.repository.jpa.JpaTicketRepo' mapperInterface. Bean already defined with the same name!
+2019-11-16 17:44:44.852  INFO 6089 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-11-16 17:44:44.948  INFO 6089 --- [JavaFX-Launcher] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-11-16 17:44:45.311  INFO 6089 --- [JavaFX-Launcher] liquibase.executor.jvm.JdbcExecutor      : SELECT COUNT(*) FROM public.databasechangeloglock
+2019-11-16 17:44:45.316  INFO 6089 --- [JavaFX-Launcher] liquibase.executor.jvm.JdbcExecutor      : SELECT COUNT(*) FROM public.databasechangeloglock
+2019-11-16 17:44:45.318  INFO 6089 --- [JavaFX-Launcher] liquibase.executor.jvm.JdbcExecutor      : SELECT LOCKED FROM public.databasechangeloglock WHERE ID=1
+2019-11-16 17:44:45.327  INFO 6089 --- [JavaFX-Launcher] l.lockservice.StandardLockService        : Successfully acquired change log lock
+2019-11-16 17:44:46.365  INFO 6089 --- [JavaFX-Launcher] liquibase.executor.jvm.JdbcExecutor      : SELECT MD5SUM FROM public.databasechangelog WHERE MD5SUM IS NOT NULL LIMIT 1
+2019-11-16 17:44:46.366  INFO 6089 --- [JavaFX-Launcher] liquibase.executor.jvm.JdbcExecutor      : SELECT COUNT(*) FROM public.databasechangelog
+2019-11-16 17:44:46.367  INFO 6089 --- [JavaFX-Launcher] l.c.StandardChangeLogHistoryService      : Reading from public.databasechangelog
+2019-11-16 17:44:46.367  INFO 6089 --- [JavaFX-Launcher] liquibase.executor.jvm.JdbcExecutor      : SELECT * FROM public.databasechangelog ORDER BY DATEEXECUTED ASC, ORDEREXECUTED ASC
+2019-11-16 17:44:46.386  INFO 6089 --- [JavaFX-Launcher] l.lockservice.StandardLockService        : Successfully released change log lock
+2019-11-16 17:44:46.476  INFO 6089 --- [JavaFX-Launcher] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2019-11-16 17:44:46.534  INFO 6089 --- [JavaFX-Launcher] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.6.Final}
+2019-11-16 17:44:46.731  INFO 6089 --- [JavaFX-Launcher] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2019-11-16 17:44:46.812  INFO 6089 --- [JavaFX-Launcher] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2019-11-16 17:44:47.300  INFO 6089 --- [JavaFX-Launcher] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2019-11-16 17:44:47.305  INFO 6089 --- [JavaFX-Launcher] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-11-16 17:44:47.990 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        auditory0_.id as id1_0_,
+        auditory0_.address as address2_0_,
+        auditory0_.audience_max_count as audience3_0_ 
+    from
+        auditory auditory0_
+2019-11-16 17:44:48.042 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_,
+        person0_.email as email2_1_,
+        person0_.fio as fio3_1_ 
+    from
+        person person0_
+2019-11-16 17:44:48.063 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        show0_.id as id1_3_,
+        show0_.auditory_id as auditory4_3_,
+        show0_.presentation_id as presenta5_3_,
+        show0_.speaker_id as speaker_6_3_,
+        show0_.time_end as time_end2_3_,
+        show0_.time_start as time_sta3_3_ 
+    from
+        show show0_
+2019-11-16 17:44:48.068 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        auditory0_.id as id1_0_0_,
+        auditory0_.address as address2_0_0_,
+        auditory0_.audience_max_count as audience3_0_0_ 
+    from
+        auditory auditory0_ 
+    where
+        auditory0_.id=?
+2019-11-16 17:44:48.077 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        presentati0_.id as id1_2_0_,
+        presentati0_.subject as subject2_2_0_,
+        presentati0_.title as title3_2_0_ 
+    from
+        presentation presentati0_ 
+    where
+        presentati0_.id=?
+2019-11-16 17:44:48.082 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:44:48.084 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        auditory0_.id as id1_0_0_,
+        auditory0_.address as address2_0_0_,
+        auditory0_.audience_max_count as audience3_0_0_ 
+    from
+        auditory auditory0_ 
+    where
+        auditory0_.id=?
+2019-11-16 17:44:48.086 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        presentati0_.id as id1_2_0_,
+        presentati0_.subject as subject2_2_0_,
+        presentati0_.title as title3_2_0_ 
+    from
+        presentation presentati0_ 
+    where
+        presentati0_.id=?
+2019-11-16 17:44:48.087 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:44:48.101 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        ticket0_.id as id1_4_,
+        ticket0_.person_id as person_i2_4_,
+        ticket0_.show_id as show_id3_4_ 
+    from
+        ticket ticket0_
+2019-11-16 17:44:48.103 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:44:48.104 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        show0_.id as id1_3_0_,
+        show0_.auditory_id as auditory4_3_0_,
+        show0_.presentation_id as presenta5_3_0_,
+        show0_.speaker_id as speaker_6_3_0_,
+        show0_.time_end as time_end2_3_0_,
+        show0_.time_start as time_sta3_3_0_,
+        auditory1_.id as id1_0_1_,
+        auditory1_.address as address2_0_1_,
+        auditory1_.audience_max_count as audience3_0_1_,
+        presentati2_.id as id1_2_2_,
+        presentati2_.subject as subject2_2_2_,
+        presentati2_.title as title3_2_2_,
+        person3_.id as id1_1_3_,
+        person3_.email as email2_1_3_,
+        person3_.fio as fio3_1_3_ 
+    from
+        show show0_ 
+    left outer join
+        auditory auditory1_ 
+            on show0_.auditory_id=auditory1_.id 
+    left outer join
+        presentation presentati2_ 
+            on show0_.presentation_id=presentati2_.id 
+    left outer join
+        person person3_ 
+            on show0_.speaker_id=person3_.id 
+    where
+        show0_.id=?
+2019-11-16 17:44:48.107 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:44:48.109 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:44:48.110 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:44:48.111 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        show0_.id as id1_3_0_,
+        show0_.auditory_id as auditory4_3_0_,
+        show0_.presentation_id as presenta5_3_0_,
+        show0_.speaker_id as speaker_6_3_0_,
+        show0_.time_end as time_end2_3_0_,
+        show0_.time_start as time_sta3_3_0_,
+        auditory1_.id as id1_0_1_,
+        auditory1_.address as address2_0_1_,
+        auditory1_.audience_max_count as audience3_0_1_,
+        presentati2_.id as id1_2_2_,
+        presentati2_.subject as subject2_2_2_,
+        presentati2_.title as title3_2_2_,
+        person3_.id as id1_1_3_,
+        person3_.email as email2_1_3_,
+        person3_.fio as fio3_1_3_ 
+    from
+        show show0_ 
+    left outer join
+        auditory auditory1_ 
+            on show0_.auditory_id=auditory1_.id 
+    left outer join
+        presentation presentati2_ 
+            on show0_.presentation_id=presentati2_.id 
+    left outer join
+        person person3_ 
+            on show0_.speaker_id=person3_.id 
+    where
+        show0_.id=?
+2019-11-16 17:44:48.114 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:44:48.115 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        show0_.id as id1_3_0_,
+        show0_.auditory_id as auditory4_3_0_,
+        show0_.presentation_id as presenta5_3_0_,
+        show0_.speaker_id as speaker_6_3_0_,
+        show0_.time_end as time_end2_3_0_,
+        show0_.time_start as time_sta3_3_0_,
+        auditory1_.id as id1_0_1_,
+        auditory1_.address as address2_0_1_,
+        auditory1_.audience_max_count as audience3_0_1_,
+        presentati2_.id as id1_2_2_,
+        presentati2_.subject as subject2_2_2_,
+        presentati2_.title as title3_2_2_,
+        person3_.id as id1_1_3_,
+        person3_.email as email2_1_3_,
+        person3_.fio as fio3_1_3_ 
+    from
+        show show0_ 
+    left outer join
+        auditory auditory1_ 
+            on show0_.auditory_id=auditory1_.id 
+    left outer join
+        presentation presentati2_ 
+            on show0_.presentation_id=presentati2_.id 
+    left outer join
+        person person3_ 
+            on show0_.speaker_id=person3_.id 
+    where
+        show0_.id=?
+2019-11-16 17:44:48.127 DEBUG 6089 --- [JavaFX-Launcher] org.hibernate.SQL                        : 
+    select
+        presentati0_.id as id1_2_,
+        presentati0_.subject as subject2_2_,
+        presentati0_.title as title3_2_ 
+    from
+        presentation presentati0_
+2019-11-16 17:44:48.333  INFO 6089 --- [JavaFX-Launcher] o.s.boot.SpringApplication               : Started application in 5.773 seconds (JVM running for 7.021)
+2019-11-16 17:45:00.496 DEBUG 6089 --- [JavaFX Application Thread] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_0_,
+        person0_.email as email2_1_0_,
+        person0_.fio as fio3_1_0_ 
+    from
+        person person0_ 
+    where
+        person0_.id=?
+2019-11-16 17:45:00.512 DEBUG 6089 --- [JavaFX Application Thread] org.hibernate.SQL                        : 
+    delete 
+    from
+        person 
+    where
+        id=?
+2019-11-16 17:45:00.522 DEBUG 6089 --- [JavaFX Application Thread] org.hibernate.SQL                        : 
+    select
+        person0_.id as id1_1_,
+        person0_.email as email2_1_,
+        person0_.fio as fio3_1_ 
+    from
+        person person0_
