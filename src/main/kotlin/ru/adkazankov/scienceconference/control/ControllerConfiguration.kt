@@ -5,9 +5,9 @@ import javafx.scene.Parent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.data.jpa.repository.JpaRepository
 import ru.adkazankov.scienceconference.control.edit.AbstractEditFrameController
 import ru.adkazankov.scienceconference.domain.*
+import ru.adkazankov.scienceconference.repository.MyRepository
 import java.io.IOException
 
 private const val ABSTRACT_TAB_FRAME = "view.fxml/AbstractTab.fxml"
@@ -21,12 +21,28 @@ class ControllerConfiguration {
             @Autowired personTabController: AbstractEntityTabController<Person>
     )= listOf(auditoryTabController,personTabController)
 
+    @Bean("showTab")
+    fun getShowTab(): View = loadView(ABSTRACT_TAB_FRAME)
+    @Bean
+    fun getShowTabController(
+            @Autowired jpaRepository: MyRepository<Show>,
+            @Autowired abstractEditFrameController: AbstractEditFrameController<Show>
+    ): AbstractEntityTabController<Show> {
+        val controller = getShowTab().controller as AbstractEntityTabController<Show>
+        return controller.apply {
+            this.entityType = Show::class.java
+            this.name = "Show"
+            this.repository = jpaRepository
+            this.abstractEditFrameController = abstractEditFrameController
+        }
+    }
+
 
     @Bean("ticketTab")
     fun getTicketTab(): View = loadView(ABSTRACT_TAB_FRAME)
     @Bean
     fun getTicketTabController(
-            @Autowired jpaRepository: JpaRepository<Ticket, Long>,
+            @Autowired jpaRepository: MyRepository<Ticket>,
             @Autowired abstractEditFrameController: AbstractEditFrameController<Ticket>
     ): AbstractEntityTabController<Ticket> {
         val controller = getTicketTab().controller as AbstractEntityTabController<Ticket>
@@ -43,7 +59,7 @@ class ControllerConfiguration {
     fun getPresentationTab(): View = loadView(ABSTRACT_TAB_FRAME)
     @Bean
     fun getPresentationTabController(
-            @Autowired jpaRepository: JpaRepository<Presentation, Long>,
+            @Autowired jpaRepository: MyRepository<Presentation>,
             @Autowired abstractEditFrameController: AbstractEditFrameController<Presentation>
     ): AbstractEntityTabController<Presentation> {
         val controller = getPresentationTab().controller as AbstractEntityTabController<Presentation>
@@ -55,45 +71,12 @@ class ControllerConfiguration {
         }
     }
 
-    @Bean("speakerTab")
-    fun getSpeakerTab(): View = loadView(ABSTRACT_TAB_FRAME)
-    @Bean
-    fun getSpeakerTabController(
-            @Autowired jpaRepository: JpaRepository<Speaker, Long>,
-            @Autowired abstractEditFrameController: AbstractEditFrameController<Speaker>
-    ): AbstractEntityTabController<Speaker> {
-        val controller = getSpeakerTab().controller as AbstractEntityTabController<Speaker>
-        return controller.apply {
-            this.entityType = Speaker::class.java
-            this.name = "Speaker"
-            this.repository = jpaRepository
-            this.abstractEditFrameController = abstractEditFrameController
-        }
-    }
-
-
-    @Bean("companyTab")
-    fun getCompanyTab(): View = loadView(ABSTRACT_TAB_FRAME)
-    @Bean
-    fun getCompanyTabController(
-            @Autowired jpaRepository: JpaRepository<Company, Long>,
-            @Autowired abstractEditFrameController: AbstractEditFrameController<Company>
-    ): AbstractEntityTabController<Company> {
-        val controller = getCompanyTab().controller as AbstractEntityTabController<Company>
-        return controller.apply {
-            this.entityType = Company::class.java
-            this.name = "Company"
-            this.repository = jpaRepository
-            this.abstractEditFrameController = abstractEditFrameController
-        }
-    }
-
 
     @Bean("auditoryTab")
     fun getAuditoryTab(): View = loadView(ABSTRACT_TAB_FRAME)
     @Bean
     fun getAuditoryTabController(
-            @Autowired jpaRepository: JpaRepository<Auditory, Long>,
+            @Autowired jpaRepository: MyRepository<Auditory>,
             @Autowired abstractEditFrameController: AbstractEditFrameController<Auditory>
     ): AbstractEntityTabController<Auditory> {
         val controller = getAuditoryTab().controller as AbstractEntityTabController<Auditory>
@@ -110,7 +93,7 @@ class ControllerConfiguration {
     fun getPersonTab(): View = loadView(ABSTRACT_TAB_FRAME)
     @Bean
     fun getPersonTabController(
-            @Autowired jpaRepository: JpaRepository<Person, Long>,
+            @Autowired jpaRepository: MyRepository<Person>,
             @Autowired abstractEditFrameController: AbstractEditFrameController<Person>
     ): AbstractEntityTabController<Person> {
         val controller = getPersonTab ().controller as AbstractEntityTabController<Person>

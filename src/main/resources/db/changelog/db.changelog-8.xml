@@ -1,0 +1,18 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet id="db.changelog-8-create-tables-v1" author="adkazankov">
+        <sql>
+            <![CDATA[
+                DROP TABLE IF EXISTS ticket CASCADE;
+                DROP TABLE IF EXISTS presentation CASCADE;
+                DROP TABLE IF EXISTS auditory CASCADE;
+                DROP TABLE IF EXISTS speaker CASCADE;
+                DROP TABLE IF EXISTS company CASCADE;
+                DROP TABLE IF EXISTS person CASCADE;
+            ]]>
+        </sql>
+        <sqlFile path="/db/versions/db_v1.sql"  splitStatements="false"/>
+    </changeSet>
+</databaseChangeLog>

@@ -13,10 +13,31 @@ open class Ticket {
     @ManyToOne
     open var person: Person? = null
     @ManyToOne
-    open var presentation: Presentation? = null
+    open var show: Show? = null
 
     override fun toString(): String {
-        return "$person, presentation=$presentation, id=$id"
+        return "$id"
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Ticket
+
+        if (id != other.id) return false
+        if (person != other.person) return false
+        if (show != other.show) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = id?.hashCode() ?: 0
+        result = 31 * result + (person?.hashCode() ?: 0)
+        result = 31 * result + (show?.hashCode() ?: 0)
+        return result
+    }
+
 
 }

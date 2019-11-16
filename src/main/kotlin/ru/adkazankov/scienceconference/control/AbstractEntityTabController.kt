@@ -9,9 +9,9 @@ import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.VBox
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.transaction.annotation.Transactional
 import ru.adkazankov.scienceconference.control.edit.AbstractEditFrameController
+import ru.adkazankov.scienceconference.repository.MyRepository
 import ru.adkazankov.scienceconference.util.DbWork
 import ru.adkazankov.scienceconference.util.showError
 import ru.adkazankov.scienceconference.util.showInfo
@@ -30,7 +30,7 @@ class AbstractEntityTabController<T>: CrudController {
     lateinit var abstractEditFrameController: AbstractEditFrameController<T>
     lateinit var entityType: Class<T>
     lateinit var name: String
-    lateinit var repository: JpaRepository<T, *>
+    lateinit var repository: MyRepository<T>
 
     @FXML
     lateinit var content: AnchorPane
