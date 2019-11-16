@@ -5,6 +5,6 @@
 SELECT COUNT(*) FROM 
 (
 SELECT DISTINCT person_id 
-FROM ticket t JOIN presentation p ON t.presentation_id = p.id
-WHERE p.auditory_id = 1
+FROM ticket t JOIN show s ON t.show_id = s.id
+WHERE s.auditory_id = 1
 ) persons
